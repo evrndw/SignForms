@@ -55,13 +55,23 @@ public class SignUp extends JDialog {
         // cria novo usuario
 
         String name, surname, email, password, confirmPwd;
-        name = tfName.getText();
-        surname = tfSurname.getText();
-        email = tfEmail.getText();
-        password = String.valueOf(pfPwd.getPassword());
-        confirmPwd = String.valueOf((pfConfirmPwd.getPassword()));
+        name = tfName.getText().trim();
+        surname = tfSurname.getText().trim();
+        email = tfEmail.getText().trim();
+        password = String.valueOf(pfPwd.getPassword()).trim();
+        confirmPwd = String.valueOf((pfConfirmPwd.getPassword())).trim();
 
         User user = new User(name, surname, email, password);
+
+        if (name.contains(",") || surname.contains(",") || email.contains(",") || password.contains(",")) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Não é permitido utilizar vírgulas (,) nos campos.",
+                    "Caractere inválido",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
 
         if (name.isEmpty() || surname.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPwd.isEmpty()) {
             JOptionPane.showMessageDialog(

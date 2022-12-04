@@ -27,8 +27,8 @@ public class SignIn extends JDialog{
         lbRegister.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         btnLogin.addActionListener(e -> { //botão de login
-            String email = tfEmail.getText();
-            String password = String.valueOf(pfPwd.getPassword());
+            String email = tfEmail.getText().trim();
+            String password = String.valueOf(pfPwd.getPassword()).trim();
             login(email, password);
         });
 
