@@ -4,8 +4,6 @@ import Data.Database;
 import Data.User;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -21,6 +19,8 @@ public class SignUp extends JDialog {
     private JLabel lbLogin;
 
     public SignUp (JFrame parent) {
+
+        // define atributos do formulario
         super(parent);
         setTitle("Oliveira Trade");
         setContentPane(SignUpPanel);
@@ -32,14 +32,11 @@ public class SignUp extends JDialog {
         lbLogin.setForeground(Color.BLUE.darker());
         lbLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        btnSignUp.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    createUser();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+        btnSignUp.addActionListener(e -> {
+            try {
+                createUser();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         });
 
@@ -55,6 +52,8 @@ public class SignUp extends JDialog {
     }
 
     private void createUser() throws IOException {
+        // cria novo usuario
+
         String name, surname, email, password, confirmPwd;
         name = tfName.getText();
         surname = tfSurname.getText();
@@ -94,6 +93,7 @@ public class SignUp extends JDialog {
             return;
         }
 
+        // adiciona usuario a base de dados
         Database.addUser(user);
         Database.updateCSV(user);
 

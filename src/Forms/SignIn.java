@@ -13,6 +13,8 @@ public class SignIn extends JDialog{
     private JButton btnLogin;
 
     public SignIn(JFrame parent) {
+
+        // define atributos do formulario
         super(parent);
         setTitle("Oliveira Trade");
         setContentPane(SignInPanel);
@@ -24,13 +26,13 @@ public class SignIn extends JDialog{
         lbRegister.setForeground(Color.BLUE.darker());
         lbRegister.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        btnLogin.addActionListener(e -> {
+        btnLogin.addActionListener(e -> { //botão de login
             String email = tfEmail.getText();
             String password = String.valueOf(pfPwd.getPassword());
             login(email, password);
         });
 
-        lbRegister.addMouseListener(new MouseAdapter() {
+        lbRegister.addMouseListener(new MouseAdapter() { //botão de registro
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
@@ -42,6 +44,8 @@ public class SignIn extends JDialog{
     }
 
     private void login(String email, String password) {
+        //efetua login
+
         if (Database.checkUser(email)) {
             if (Database.checkPwd(email, password)) {
                 JOptionPane.showMessageDialog(
